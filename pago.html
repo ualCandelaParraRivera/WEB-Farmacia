@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farmacia Los Llanos - Pago Seguro</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> 
+
+<!-- IMPORTANTE: Aquí vinculamos tu archivo CSS externo -->
+<link rel="stylesheet" href="estilos.css">
+
+</head>
+<body>
+
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <img src="img/logo.png" alt="Logo">
+        <h1>Farmacia Los Llanos</h1>
+    </a>
+    <div class="secure-badge">🔒 Pago 100% Seguro</div>
+</header>
+
+<div class="checkout-container">
+
+    <!-- BARRA DE PROGRESO -->
+    <div class="steps-indicator">
+        <div class="step active" id="progress-1">
+            <div class="step-number">1</div>
+            <div class="step-title">Envío</div>
+        </div>
+        <div class="line"></div>
+        <div class="step" id="progress-2">
+            <div class="step-number">2</div>
+            <div class="step-title">Pago</div>
+        </div>
+        <div class="line"></div>
+        <div class="step" id="progress-3">
+            <div class="step-number">3</div>
+            <div class="step-title">Confirmar</div>
+        </div>
+    </div>
+
+    <div class="checkout-layout">
+        
+        <!-- COLUMNA IZQUIERDA (CONTENIDO CAMBIANTE) -->
+        <div class="left-column">
+            
+            <!-- === PASO 1: ENVÍO === -->
+            <div id="step-1" class="step-content active">
+                <section class="checkout-form-section">
+                    <h2 class="section-title">Datos de Envío</h2>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Nombre</label>
+                            <input type="text" id="input-name" placeholder="Ej: Juan">
+                        </div>
+                        <div class="input-group">
+                            <label>Apellidos</label>
+                            <input type="text" placeholder="Ej: Pérez García">
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Dirección completa</label>
+                            <input type="text" placeholder="Calle, número, piso...">
+                        </div>
+                        <div class="input-group">
+                            <label>Código Postal</label>
+                            <input type="text" placeholder="04...">
+                        </div>
+                        <div class="input-group">
+                            <label>Ciudad</label>
+                            <input type="text" placeholder="Ej: Almería">
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Teléfono</label>
+                            <input type="tel" placeholder="Para notificaciones">
+                        </div>
+                    </div>
+                    <div class="step-actions right">
+                        <button class="action-btn next" onclick="goToStep(2)">Continuar a Pago &rarr;</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- === PASO 2: PAGO === -->
+            <div id="step-2" class="step-content">
+                <section class="checkout-form-section">
+                    <h2 class="section-title">Método de Pago</h2>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-option active" onclick="selectPayment(this, 'card')">
+                            💳 Tarjeta
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this, 'paypal')">
+                            🅿️ PayPal
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this, 'bizum')">
+                            📱 Bizum
+                        </div>
+                    </div>
+
+                    <!-- TARJETA -->
+                    <div id="payment-card" class="payment-details-box visible">
+                        <div class="input-group">
+                            <label>Titular</label>
+                            <input type="text" placeholder="Como aparece en la tarjeta">
+                        </div>
+                        <div class="input-group">
+                            <label>Número de tarjeta</label>
+                            <div style="position:relative;">
+                                <input type="text" placeholder="0000 0000 0000 0000">
+                                <span style="position:absolute; right:10px; top:10px; font-size:20px;">💳</span>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Caducidad</label>
+                                <input type="text" placeholder="MM/AA">
+                            </div>
+                            <div class="input-group">
+                                <label>CVC</label>
+                                <input type="text" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PAYPAL -->
+                    <div id="payment-paypal" class="payment-details-box">
+                        <div class="paypal-notice">Inicia sesión para pagar con PayPal</div>
+                        <div class="input-group">
+                            <label>Email PayPal</label>
+                            <input type="email" placeholder="usuario@ejemplo.com">
+                        </div>
+                    </div>
+
+                    <!-- BIZUM -->
+                    <div id="payment-bizum" class="payment-details-box">
+                        <div class="bizum-notice">Introduce tu móvil para Bizum</div>
+                        <div class="input-group">
+                            <label>Móvil</label>
+                            <input type="tel" placeholder="+34 600 000 000">
+                        </div>
+                    </div>
+
+                    <div class="step-actions space-between">
+                        <button class="action-btn prev" onclick="goToStep(1)">&larr; Atrás</button>
+                        <button class="action-btn next" onclick="goToStep(3)">Revisar Pedido &rarr;</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- === PASO 3: CONFIRMACIÓN === -->
+            <div id="step-3" class="step-content">
+                <section class="checkout-form-section">
+                    <h2 class="section-title">Confirmar Pedido</h2>
+                    <p style="color: #666; margin-bottom: 20px;">
+                        Por favor, revisa que todos los datos sean correctos antes de finalizar.
+                    </p>
+
+                    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                        <h4 style="margin-top:0; color:var(--teal);">Datos de entrega</h4>
+                        <p style="font-size: 14px; margin: 5px 0;"><strong>Cliente:</strong> <span id="summary-name">Cliente</span></p>
+                        <p style="font-size: 14px; margin: 5px 0;"><strong>Dirección:</strong> Calle Ejemplo, Almería</p>
+                    </div>
+
+                    <div class="step-actions space-between">
+                        <button class="action-btn prev" onclick="goToStep(2)">&larr; Volver</button>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: RESUMEN (SIEMPRE VISIBLE) -->
+        <div class="right-column">
+            <div class="order-summary">
+                <h2 class="section-title">Tu Pedido</h2>
+                <div id="checkout-items-list" style="margin-bottom: 20px; font-size: 14px; color: #555;">
+                    Cargando...
+                </div>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="checkout-subtotal">0.00€</span>
+                </div>
+                <div class="summary-row">
+                    <span>Envío</span>
+                    <span style="color: var(--success-green); font-weight: 600;">GRATIS</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span id="checkout-total">0.00€</span>
+                </div>
+                
+                <!-- El botón de pagar solo aparece en el paso 3 -->
+                <button id="final-pay-btn" class="pay-btn hidden" onclick="processPayment()">
+                    🔒 Pagar Ahora
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="simple-footer">
+    <p>&copy; 2023 Farmacia Los Llanos.</p>
+</footer>
+
+<!-- IMPORTANTE: Aquí vinculamos tu archivo JS externo -->
+<script type="module" src="pago.js"></script> 
+</body>
+
+</html>

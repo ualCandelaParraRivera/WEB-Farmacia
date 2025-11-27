@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farmacia Los Llanos - Mi Carrito</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> 
+
+<!-- VINCULAMOS ESTILOS -->
+<link rel="stylesheet" href="estilos.css">
+
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo Farmacia Los Llanos">
+    <div class="text-container">
+      <h1>Farmacia Los Llanos</h1>
+      <div class="tagline">Cuidamos de ti</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <a href="carrito.html" class="cart-btn" style="background: rgba(255, 255, 255, 0.2);">Mi Carrito</a>
+    <div class="cta">
+      <a href="login.html" class="btn">LOG IN</a>
+      <a href="signup.html" class="btn">SIGN UP</a>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+    <h1 class="cart-title">Tu Carrito de Compra</h1>
+
+    <div class="cart-container">
+        
+        <!-- LISTA DE PRODUCTOS -->
+        <div class="cart-items">
+            <div class="cart-header">
+                <div>Producto</div>
+                <div style="text-align: center;">Cantidad</div>
+                <div style="text-align: right;">Precio</div>
+                <div></div>
+            </div>
+            
+            <!-- AQUÍ SE CARGAN LOS PRODUCTOS CON JS -->
+            <div id="cart-items-container">
+            </div>
+        </div>
+
+        <!-- RESUMEN -->
+        <div class="cart-summary">
+            <div class="summary-title">Resumen</div>
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">0.00€</span>
+            </div>
+            <div class="summary-row">
+                <span>Envío</span>
+                <span>Gratis</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="cart-total" style="color: var(--price-color);">0.00€</span>
+            </div>
+            
+            <a href="pago.html" class="checkout-btn">Finalizar Compra</a>
+            <a href="productos.html" style="display:block; text-align:center; margin-top:15px; color:var(--teal); text-decoration:none; font-size:14px;">Seguir comprando</a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo Farmacia Los Llanos">
+    <div class="text-container">
+      <h1>Farmacia Los Llanos</h1>
+      <div class="tagline">Cuidamos de ti</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <a href="carrito.html" class="cart-btn">Mi Carrito</a>
+    <div class="cta">
+      <a href="login.html" class="btn">LOG IN</a>
+      <a href="signup.html" class="btn">SIGN UP</a>
+    </div>
+  </div>
+</footer>
+
+<!-- VINCULAMOS JS -->
+<script type="module" src="carrito.js"></script>
+</body>
+</html>

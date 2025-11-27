@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farmacia Los Llanos - Blog</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> 
+
+<link rel="stylesheet" href="estilos.css">
+
+<style>
+    /* Estilos específicos para la lectura de artículos */
+    .blog-container {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+    .blog-post {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+    }
+    .blog-post:hover {
+        transform: translateY(-5px);
+    }
+    .blog-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+    }
+    .blog-content {
+        padding: 40px;
+    }
+    .blog-date {
+        color: var(--teal);
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        display: block;
+    }
+    .blog-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        color: var(--primary-blue);
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+    .blog-text {
+        color: var(--text-dark);
+        line-height: 1.8;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .share-bar {
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+        display: flex;
+        gap: 15px;
+        color: var(--text-light);
+        font-size: 14px;
+    }
+    
+    @media(max-width: 768px) {
+        .blog-image { height: 200px; }
+        .blog-content { padding: 25px; }
+        .blog-title { font-size: 24px; }
+    }
+</style>
+
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo Farmacia Los Llanos">
+    <div class="text-container">
+      <h1>Farmacia Los Llanos</h1>
+      <div class="tagline">Cuidamos de ti</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <a href="carrito.html" class="cart-btn">Mi Carrito</a>
+    <div class="cta">
+      <a href="login.html" class="btn">LOG IN</a>
+      <a href="signup.html" class="btn">SIGN UP</a>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+    
+    <h1 class="section-title" style="margin-bottom: 60px;">Blog de Salud y Bienestar</h1>
+
+    <div class="blog-container">
+        
+        <!-- ARTÍCULO 1 (Basado en tu imagen) -->
+        <article class="blog-post">
+            <img src="img/blog1.jpg" alt="Cuidado de manos y pies" class="blog-image">
+            <div class="blog-content">
+                <span class="blog-date">Salud Corporal • 15 Nov 2023</span>
+                <h2 class="blog-title">¿Estás cuidando bien de tus manos y tus pies?</h2>
+                <div class="blog-text">
+                    <p>Las manos y los pies, herramientas esenciales de nuestro cuerpo, sufren a diario y requieren cuidados específicos que a menudo ignoramos.</p>
+                    <p>Rutinas clave de protección, hidratación y cuidado, como usar guantes, lavar con agua tibia, exfoliación y elegir calzado adecuado, son fundamentales para mantenerlos saludables.</p>
+                    <p>En Farmacia Los Llanos recomendamos hidratación diaria antes de dormir y el uso de protección solar también en las manos para evitar manchas prematuras.</p>
+                </div>
+                <div class="share-bar">
+                    Compartir artículo: <span>Facebook</span> • <span>Twitter</span> • <span>WhatsApp</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- ARTÍCULO 2 -->
+        <article class="blog-post">
+            <img src="img/blog2.jpg" alt="Piel sana" class="blog-image">
+            <div class="blog-content">
+                <span class="blog-date">Dermoestética • 10 Nov 2023</span>
+                <h2 class="blog-title">Consejos para una Piel Sana en Invierno</h2>
+                <div class="blog-text">
+                    <p>El frío puede ser el peor enemigo de nuestra piel. La sequedad y el viento provocan grietas y rojeces que podemos evitar con una rutina adecuada.</p>
+                    <p>Descubre las rutinas clave de protección, hidratación y cuidado para mantener tu piel saludable todo el año, prestando especial atención a la barrera cutánea.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- ARTÍCULO 3 -->
+        <article class="blog-post">
+            <img src="img/blog3.jpg" alt="Bienestar diario" class="blog-image">
+            <div class="blog-content">
+                <span class="blog-date">Vida Sana • 05 Nov 2023</span>
+                <h2 class="blog-title">Bienestar y Cuidado Diario</h2>
+                <div class="blog-text">
+                    <p>Pequeños hábitos diarios que pueden transformar tu salud general y la de tu familia. Desde la alimentación hasta el sueño reparador.</p>
+                    <p>Incorporar 30 minutos de caminata y beber 2 litros de agua son los pilares básicos para empezar a sentirte mejor hoy mismo.</p>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo Farmacia Los Llanos">
+    <div class="text-container">
+      <h1>Farmacia Los Llanos</h1>
+      <div class="tagline">Cuidamos de ti</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <a href="carrito.html" class="cart-btn">Mi Carrito</a>
+    <div class="cta">
+      <a href="login.html" class="btn">LOG IN</a>
+      <a href="signup.html" class="btn">SIGN UP</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Lógica de usuario para el header -->
+<script type="module">
+  import { initAuthListener } from './firebase.js';
+  initAuthListener(); 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farmacia Los Llanos - Registro</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo">
+    <h1 style="font-size:20px; margin:0;">Farmacia Los Llanos</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="wrapper">
+  <div class="left">
+    <h2>Crear cuenta</h2>
+    <p style="margin-bottom: 25px; color: #666; font-size: 15px;">Empieza gratis hoy. No requiere tarjeta de crédito.</p>
+    
+    <div id="error-box" class="error-msg"></div>
+
+    <form id="signup-form">
+      <!-- Fila para Nombre y Apellidos -->
+      <div style="display: flex; gap: 15px;">
+          <div class="input-group" style="flex: 1;">
+            <label>Nombre</label>
+            <input type="text" id="reg-name" placeholder="Tu nombre" required>
+          </div>
+          <div class="input-group" style="flex: 1;">
+            <label>Apellidos</label>
+            <input type="text" id="reg-surname" placeholder="Tus apellidos" required>
+          </div>
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="ejemplo@correo.com" required>
+      </div>
+      
+      <div class="input-group">
+        <label>Repetir Email</label>
+        <input type="email" id="reg-email-repeat" placeholder="Confirma tu email" required>
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña</label>
+        <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" required>
+      </div>
+        
+      <div class="input-group">
+        <label>Repetir Contraseña</label>
+        <input type="password" id="reg-pass-repeat" placeholder="Confirma la contraseña" required>
+      </div>
+
+      <button type="submit" class="signup-btn">Crear cuenta</button>
+    </form>
+    
+    <p style="margin-top:20px; font-size:14px; text-align: center; color: #666;">
+        ¿Ya tienes cuenta? <a href="login.html" style="color:var(--teal); font-weight:bold; text-decoration: none;">Inicia sesión</a>
+    </p>
+  </div>
+
+  <div class="right">
+    <img src="img/imagenlogin.png" alt="Registro">
+  </div>
+</div>
+
+<script type="module">
+    import { auth, createUserWithEmailAndPassword, updateProfile } from './firebase.js';
+
+    const form = document.getElementById('signup-form');
+    const errorBox = document.getElementById('error-box');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.style.display = 'none';
+        
+        const name = document.getElementById('reg-name').value;
+        const surname = document.getElementById('reg-surname').value;
+        const email = document.getElementById('reg-email').value;
+        const emailRepeat = document.getElementById('reg-email-repeat').value;
+        const pass = document.getElementById('reg-pass').value;
+        const passRepeat = document.getElementById('reg-pass-repeat').value;
+        const btn = form.querySelector('button');
+
+        // VALIDACIONES
+        if (email !== emailRepeat) {
+            errorBox.style.display = 'block';
+            errorBox.innerText = "Los correos electrónicos no coinciden.";
+            return;
+        }
+        if (pass !== passRepeat) {
+            errorBox.style.display = 'block';
+            errorBox.innerText = "Las contraseñas no coinciden.";
+            return;
+        }
+
+        btn.innerText = "Creando...";
+        btn.disabled = true;
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+            const user = userCredential.user;
+            await updateProfile(user, { displayName: `${name} ${surname}` });
+            alert("¡Cuenta creada con éxito! Ahora estás logueado.");
+            window.location.href = "index.html"; 
+        } catch (error) {
+            console.error(error);
+            errorBox.style.display = 'block';
+            if(error.code === 'auth/email-already-in-use') {
+                errorBox.innerText = "Este email ya está registrado.";
+            } else if(error.code === 'auth/weak-password') {
+                errorBox.innerText = "La contraseña debe tener al menos 6 caracteres.";
+            } else {
+                errorBox.innerText = "Error: " + error.message;
+            }
+            btn.innerText = "Crear cuenta";
+            btn.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>

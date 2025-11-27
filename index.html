@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farmacia Los Llanos - Home</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="estilos.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo Farmacia Los Llanos">
+    <div class="text-container">
+      <h1>Farmacia Los Llanos</h1>
+      <div class="tagline">Cuidamos de ti</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+        <li><a href="index.html" style="text-decoration: underline;">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <a href="carrito.html" class="cart-btn">Mi Carrito</a>
+    <div class="cta">
+      <a href="login.html" class="btn">LOG IN</a>
+      <a href="signup.html" class="btn">SIGN UP</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hours">
+            <h2>Horario</h2>
+            <p><strong>Lunes a viernes</strong><br>9:00 a 14:00<br>17:00 a 20:30</p>
+            <p><strong>Sábados</strong><br>9:30 a 13:30</p>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<h2 class="section-title">Productos Destacados</h2>
+<div class="products">
+  <div class="card">
+      <span>Nuevo Producto</span>
+      <button onclick="window.location.href='productos.html'">Ver</button>
+  </div>
+
+  <div class="card">
+      <span>Más vendido</span>
+      <button onclick="window.location.href='productos.html'">Ver</button>
+  </div>
+</div>
+
+<!-- IMAGEN GRANDE -->
+<div class="imagen-dos-home">
+    <img src="img/imagen2home.png" alt="Imagen segunda sección Home">
+</div>
+
+<!-- SOBRE NOSOTROS -->
+<div class="section" style="display:flex; gap:40px; align-items:center; flex-wrap:wrap; justify-content:space-between;">
+  <img src="img/fotoNosotros.png" alt="Sobre nosotros" style="max-width: 500px; width: 100%; object-fit: cover;">
+  <div style="flex: 1; min-width: 300px;">
+    <h2 style="color: var(--primary-blue); font-size: 38px; margin-bottom: 20px;">Sobre nosotros</h2>
+    <p style="font-weight: 700; font-size: 18px; line-height: 1.6; color: var(--primary-blue);">
+      C/Potasio 7, Loma Cabrera (Almería)<br>
+      (+34) 950 33 70 53<br>
+      <a href="mailto:hola@farmacialosllanos.com" style="color: var(--primary-blue); text-decoration: none;">hola@farmacialosllanos.com</a>
+    </p>
+    <a href="quienes-somos.html" class="btn-general" style="background: #a8d0fd; color: #435e80; font-weight: 700; border: 1px solid #7ea7d8; margin-top: 25px;">Quiénes somos</a>
+  </div>
+</div>
+
+<!-- UBICACIÓN -->
+<div class="section" style="display:flex; gap:40px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+  <div style="flex: 1; min-width: 300px;">
+    <h2 style="color: var(--primary-blue); font-size: 38px; margin-bottom: 20px;">¿Dónde estamos?</h2>
+    <p style="font-weight: 700; font-size: 18px; color: #7caee0;">
+      C. Potasio, 7, 04120 Loma Cabrera, Almería
+    </p>
+  </div>
+  <img src="img/mapa.png" alt="Mapa ubicación" style="max-width: 500px; width: 100%; object-fit: cover;">
+</div>
+
+<!-- BLOG (ACTUALIZADO) -->
+<div class="section">
+  <h2 class="section-title">Blog</h2> 
+  <div class="blog-grid">
+    
+    <div class="blog-card">
+      <img src="img/blog1.jpg" alt="Cuidado de manos">
+      <h3>¿Cuidas bien tus manos y pies?</h3> 
+      <p>
+        Las manos y los pies sufren a diario y requieren cuidados específicos... 
+        <br><br>
+        <!-- Enlace VER MÁS -->
+        <a href="blog.html" style="color: var(--teal); font-weight: bold; text-decoration: none;">Leer más →</a>
+      </p>
+    </div>
+
+    <div class="blog-card">
+      <img src="img/blog2.jpg" alt="Piel sana">
+      <h3>Consejos para una Piel Sana</h3> 
+      <p>
+        Descubre las rutinas clave de protección e hidratación para el invierno...
+        <br><br>
+        <a href="blog.html" style="color: var(--teal); font-weight: bold; text-decoration: none;">Leer más →</a>
+      </p>
+    </div>
+
+    <div class="blog-card">
+      <img src="img/blog3.jpg" alt="Bienestar">
+      <h3>Bienestar y Cuidado Diario</h3> 
+      <p>
+        Pequeños hábitos diarios que pueden transformar tu salud general...
+        <br><br>
+        <a href="blog.html" style="color: var(--teal); font-weight: bold; text-decoration: none;">Leer más →</a>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- BOTÓN IR AL BLOG COMPLETO -->
+  <div style="text-align: center; margin-top: 40px;">
+      <a href="blog.html" class="btn-general" style="background: var(--primary-blue); font-weight: 600; padding: 12px 30px;">
+          Ver todos los artículos
+      </a>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<div class="section services" style="text-align:center;">
+  <img src="img/servicios.png" alt="Servicios">
+</div>
+
+<footer class="footer">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo Farmacia Los Llanos">
+    <div class="text-container">
+      <h1>Farmacia Los Llanos</h1>
+      <div class="tagline">Cuidamos de ti</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <a href="carrito.html" class="cart-btn">Mi Carrito</a>
+    <div class="cta">
+      <a href="login.html" class="btn">LOG IN</a>
+      <a href="signup.html" class="btn">SIGN UP</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Lógica de Usuario -->
+<script type="module">
+  import { initAuthListener } from './firebase.js';
+  initAuthListener(); 
+</script>
+
+</body>
+</html>
