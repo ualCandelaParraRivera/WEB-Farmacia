@@ -159,6 +159,50 @@ window.selectPayment = function(element, method) {
     }
 }
 
+// --- PROCESAR PAGO FINAL (ACTUALIZADO) ---
+window.processPayment = function() {
+    const btn = document.getElementById('final-pay-btn');
+    btn.innerHTML = "Procesando...";
+    btn.disabled = true;
+    btn.style.opacity = "0.8";
+    
+    // Datos de envío
+    const addressData = {
+        name: document.getElementById('input-name').value,
+        address: document.querySelector('input[placeholder*="Calle"]').value,
+        city: document.querySelector('input[placeholder*="Almería"]').value,
+        phone: document.querySelector('input[type="tel"]').value
+    };
+
+    // Calcular total real
+    let totalOrder = 0;
+    currentCart.forEach(item => totalOrder += (item.price * item.quantity));
+
+    setTimeout(async () => {
+        if(currentUser) {
+            // 1. Guardar dirección para futuro
+            await saveUserProfile(currentUser.uid, addressData);
+            
+            // 2. GUARDAR PEDIDO EN HISTORIAL (NUEVO)
+            const newOrder = {
+                items: currentCart,
+                total: totalOrder,
+                shipping: addressData,
+                paymentMethod: 'Tarjeta/Online' // Simplificado
+            };
+            await saveOrderToCloud(currentUser.uid, newOrder);
+
+            // 3. Vaciar nube
+            await saveCartToCloud(currentUser.uid, []); 
+        } else {
+            localStorage.removeItem('farmaciaCart'); 
+        }
+        
+        alert("¡Pago realizado con éxito! Gracias por confiar en Farmacia Los Llanos.");
+        window.location.href = "index.html";
+    }, 2000);
+}
+/*
 // --- PROCESAR PAGO FINAL ---
 window.processPayment = function() {
     const btn = document.getElementById('final-pay-btn');
@@ -188,4 +232,4 @@ window.processPayment = function() {
         
         window.location.href = "index.html";
     }, 2000);
-}
+} */

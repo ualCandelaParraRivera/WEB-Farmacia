@@ -13,15 +13,23 @@ try {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  /* --- BUSCADOR --- */
+  
+  /* --- 1. BUSCADOR MEJORADO --- */
   const searchInput = document.querySelector('.search-bar input');
-  const searchButton = document.querySelector('.search-bar button');
   const allProducts = document.querySelectorAll('.product-card');
 
+  // Función para quitar tildes (normalizar)
+  function normalizeText(text) {
+      return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
   function filterProducts() {
-    const searchText = searchInput.value.toLowerCase().trim();
+    const searchText = normalizeText(searchInput.value.trim());
+
     allProducts.forEach(card => {
-        const productName = card.querySelector('.name').innerText.toLowerCase();
+        const productName = normalizeText(card.querySelector('.name').innerText);
+        
+        // Búsqueda flexible (si incluye el texto)
         if (productName.includes(searchText)) {
             card.style.display = "flex"; 
         } else {
@@ -30,10 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if(searchInput) searchInput.addEventListener('input', filterProducts);
-  if(searchButton) searchButton.addEventListener('click', filterProducts);
+  // Buscar al escribir (sin necesidad de botón)
+  if(searchInput) {
+      searchInput.addEventListener('input', filterProducts);
+  }
 
-  /* --- BOTONES AÑADIR --- */
+  /* --- 2. BOTONES AÑADIR --- */
   const addButtons = document.querySelectorAll('.add-btn');
   addButtons.forEach(button => {
     button.addEventListener('click', addToCart);
@@ -48,16 +58,15 @@ async function addToCart(event) {
     const priceText = card.querySelector('.price').innerText;
     const price = parseFloat(priceText.replace('€', '').replace(',', '.'));
     
-    // Obtener imagen de forma segura
     let imageSrc = "img/placeholder.png";
     const imgTag = card.querySelector('img');
     if(imgTag) {
-        imageSrc = imgTag.getAttribute('src'); // coge la ruta relativa exacta
+        imageSrc = imgTag.getAttribute('src');
     }
 
     const product = { title, price, image: imageSrc, quantity: 1 };
 
-    // Feedback Visual Inmediato
+    // Feedback Visual
     const originalText = button.innerText;
     button.innerText = "¡Añadido!";
     button.style.background = "#0b6a66"; 
@@ -66,27 +75,23 @@ async function addToCart(event) {
 
     try {
         if (currentUser) {
-            // Intentar guardar en nube
             await addItemToCloudCart(product);
         } else {
-            // Guardar en local
             addItemToLocalStorage(product);
         }
     } catch (error) {
-        // Si falla la nube, fallback a local
-        console.error("Error guardando (fallback local):", error);
+        console.error("Error guardando:", error);
         addItemToLocalStorage(product);
     }
     
     setTimeout(() => {
-        button.innerText = "Añadir"; // Restaurar texto original
+        button.innerText = "Añadir";
         button.style.background = ""; 
         button.style.color = "";
         button.style.borderColor = "";
     }, 1000);
 }
 
-// Lógica Local
 function addItemToLocalStorage(product) {
     let cart = JSON.parse(localStorage.getItem('farmaciaCart')) || [];
     const existing = cart.find(item => item.title === product.title);
@@ -94,7 +99,6 @@ function addItemToLocalStorage(product) {
     localStorage.setItem('farmaciaCart', JSON.stringify(cart));
 }
 
-// Lógica Nube
 async function addItemToCloudCart(product) {
     let cart = await getCartFromCloud(currentUser.uid);
     const existing = cart.find(item => item.title === product.title);

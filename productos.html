@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet"> 
 
-<!-- ESTILOS GENERALES -->
 <link rel="stylesheet" href="estilos.css">
 
 </head>
@@ -48,9 +47,12 @@
 
     <section class="search-section">
         <h2 class="section-title">Productos</h2>
+        
+        <!-- BUSCADOR CON LUPA DENTRO -->
         <div class="search-bar">
-            <input type="text" placeholder="Escribir producto para buscar">
-            <button>Buscar</button>
+            <!-- Icono de lupa (simple, sin librerías externas) -->
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="¿Qué estás buscando? (ej: biberón)">
         </div>
     </section>
 
@@ -217,7 +219,7 @@
   <nav>
     <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="productos.html">Productos</a></li>
+        <li><a href="productos.html" style="text-decoration: underline;">Productos</a></li>
         <li><a href="contacto.html">Contacto</a></li>
     </ul>
   </nav>

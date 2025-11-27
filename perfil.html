@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Farmacia Los Llanos - Mi Perfil</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="img/logo.png" alt="Logo">
+    <div class="text-container">
+      <h1>Farmacia Los Llanos</h1>
+      <div class="tagline">Cuidamos de ti</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="user-actions">
+    <a href="carrito.html" class="cart-btn">Mi Carrito</a>
+    <div class="cta">
+      <a href="login.html" class="btn">LOG IN</a>
+      <a href="signup.html" class="btn">SIGN UP</a>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+    
+    <div class="profile-container">
+        
+        <!-- SIDEBAR -->
+        <div class="profile-sidebar">
+            <div class="profile-avatar">👤</div>
+            <h3 class="profile-name" id="display-name">Cargando...</h3>
+            <p class="profile-email" id="display-email">...</p>
+            
+            <div style="margin-top: 30px;">
+                <button class="profile-menu-btn active" onclick="showSection('pedidos')">📦 Mis Pedidos</button>
+                <button class="profile-menu-btn" onclick="showSection('datos')">⚙️ Mis Datos</button>
+                <button class="profile-menu-btn" onclick="logout()">🚪 Cerrar Sesión</button>
+            </div>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="profile-content">
+            
+            <!-- SECCIÓN PEDIDOS -->
+            <div id="section-pedidos" class="profile-section active">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <h2 class="profile-title">Historial de Pedidos</h2>
+                    </div>
+                    <div id="orders-list">
+                        <p style="text-align:center; color:#888; padding:20px;">Cargando historial...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DATOS -->
+            <div id="section-datos" class="profile-section">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <h2 class="profile-title">Mis Datos de Envío</h2>
+                    </div>
+                    <form id="profile-form">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Nombre Completo</label>
+                                <input type="text" id="prof-name" readonly style="background:#f0f0f0;">
+                            </div>
+                            <div class="input-group">
+                                <label>Teléfono</label>
+                                <input type="tel" id="prof-phone" placeholder="Tu teléfono">
+                            </div>
+                            <div class="input-group full-width">
+                                <label>Dirección</label>
+                                <input type="text" id="prof-address" placeholder="Tu dirección habitual">
+                            </div>
+                            <div class="input-group">
+                                <label>Ciudad</label>
+                                <input type="text" id="prof-city" placeholder="Ciudad">
+                            </div>
+                        </div>
+                        <button type="button" class="btn-submit-card" onclick="updateUserData()">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<footer class="simple-footer">
+    <p>&copy; 2023 Farmacia Los Llanos.</p>
+</footer>
+
+<script type="module" src="perfil.js"></script>
+
+</body>
+</html>

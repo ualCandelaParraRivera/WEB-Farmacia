@@ -1,8 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection, addDoc, query, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// Intentar obtener configuración
+// Configuración
 const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
 
 let app = null;
@@ -22,10 +22,10 @@ if (firebaseConfig) {
     console.log("%cModo Local Activo: Firebase no configurado.", "color: orange; font-weight: bold;");
 }
 
-/* --- FUNCIONES PROXY (SEGURAS) --- */
+/* --- FUNCIONES PROXY --- */
 
 export async function saveCartToCloud(userId, cart) {
-    if (!db) return; // Si no hay DB, no hacemos nada (el frontend usará localStorage)
+    if (!db) return;
     try {
         const cartRef = doc(db, 'artifacts', 'farmacia-los-llanos', 'users', userId, 'data', 'cart');
         await setDoc(cartRef, { items: cart }, { merge: true });
@@ -61,22 +61,52 @@ export async function getUserProfile(userId) {
     } catch (e) { return null; }
 }
 
-// Listener de Auth seguro
+// NUEVO: Guardar un pedido en el historial
+export async function saveOrderToCloud(userId, orderData) {
+    if (!db) return;
+    try {
+        // Guardamos en una subcolección 'orders' dentro del usuario
+        const ordersRef = collection(db, 'artifacts', 'farmacia-los-llanos', 'users', userId, 'orders');
+        // Añadimos fecha automática
+        orderData.date = new Date().toISOString();
+        orderData.status = 'Completado'; // Estado inicial
+        await addDoc(ordersRef, orderData);
+    } catch (e) { console.error("Error guardando pedido:", e); }
+}
+
+// NUEVO: Obtener historial de pedidos
+export async function getUserOrders(userId) {
+    if (!db) return [];
+    try {
+        const ordersRef = collection(db, 'artifacts', 'farmacia-los-llanos', 'users', userId, 'orders');
+        const q = query(ordersRef);
+        const querySnapshot = await getDocs(q);
+        
+        const orders = [];
+        querySnapshot.forEach((doc) => {
+            orders.push({ id: doc.id, ...doc.data() });
+        });
+        
+        // Ordenar por fecha (el más reciente primero)
+        return orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } catch (e) { 
+        console.error("Error leyendo pedidos:", e); 
+        return [];
+    }
+}
+
+// Listener de Auth
 export function initAuthListener(callback) {
     if (auth) {
         onAuthStateChanged(auth, (user) => handleUserUI(user, callback));
     } else {
-        // Si no hay Firebase, simulamos que no hay usuario logueado
         handleUserUI(null, callback);
     }
 }
 
-// Lógica de UI para Header
 function handleUserUI(user, callback) {
     const userActions = document.querySelector('.user-actions');
     const cta = document.querySelector('.cta');
-    
-    // Limpiar mensaje anterior si existe
     const oldMsg = document.getElementById('user-welcome');
     if(oldMsg) oldMsg.remove();
 
@@ -85,13 +115,16 @@ function handleUserUI(user, callback) {
         
         const welcomeMsg = document.createElement('div');
         welcomeMsg.id = 'user-welcome';
+        // AHORA EL NOMBRE ES UN ENLACE A MI PERFIL
         welcomeMsg.innerHTML = `
-            <span style="color:white; font-weight:600; margin-right:10px; font-size:14px;">Hola, ${user.displayName || 'Usuario'}</span>
+            <a href="perfil.html" style="color:white; font-weight:600; margin-right:10px; font-size:14px; text-decoration:none; display:flex; align-items:center; gap:5px;">
+                <span>👤</span> Hola, ${user.displayName || 'Usuario'}
+            </a>
             <button id="logout-btn" style="background:rgba(255,255,255,0.2); border:1px solid white; color:white; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px;">Salir</button>
         `;
         if(userActions) userActions.appendChild(welcomeMsg);
         
-        document.getElementById('logout-btn').onclick = () => signOut(auth).then(() => window.location.reload());
+        document.getElementById('logout-btn').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
         
         if (callback) callback(user);
     } else {
@@ -100,5 +133,4 @@ function handleUserUI(user, callback) {
     }
 }
 
-// Exportar servicios (pueden ser null) y funciones del SDK
 export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile };
