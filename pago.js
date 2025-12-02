@@ -202,34 +202,3 @@ window.processPayment = function() {
         window.location.href = "index.html";
     }, 2000);
 }
-/*
-// --- PROCESAR PAGO FINAL ---
-window.processPayment = function() {
-    const btn = document.getElementById('final-pay-btn');
-    btn.innerHTML = "Procesando...";
-    btn.disabled = true;
-    btn.style.opacity = "0.8";
-    
-    // Guardar dirección en la nube si hay usuario
-    if(currentUser) {
-        const addressData = {
-            name: document.getElementById('input-name').value,
-            address: document.querySelector('input[placeholder*="Calle"]').value,
-            city: document.querySelector('input[placeholder*="Almería"]').value,
-            phone: document.querySelector('input[type="tel"]').value
-        };
-        saveUserProfile(currentUser.uid, addressData);
-    }
-
-    setTimeout(async () => {
-        alert("¡Pago realizado con éxito! Gracias por confiar en Farmacia Los Llanos.");
-        
-        if(currentUser) {
-            await saveCartToCloud(currentUser.uid, []); // Vaciar nube
-        } else {
-            localStorage.removeItem('farmaciaCart'); // Vaciar local
-        }
-        
-        window.location.href = "index.html";
-    }, 2000);
-} */

@@ -134,3 +134,27 @@ function handleUserUI(user, callback) {
 }
 
 export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile };
+
+/* FIREBASE
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDuKMRyW9J3KUyjhSEh8Ov-h_m8VyUFdOg",
+  authDomain: "web-farmacia-40221.firebaseapp.com",
+  projectId: "web-farmacia-40221",
+  storageBucket: "web-farmacia-40221.firebasestorage.app",
+  messagingSenderId: "396311608032",
+  appId: "1:396311608032:web:2a148cee68cecfcbe2ae85",
+  measurementId: "G-B43N2DGCD0"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+} */
